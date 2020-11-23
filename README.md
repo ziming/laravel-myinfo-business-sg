@@ -46,7 +46,7 @@ MYINFOBIZ_API_TOKEN=https://sandbox.api.myinfo.gov.sg/biz/v2/token
 MYINFOBIZ_API_ENTITYPERSON=https://sandbox.api.myinfo.gov.sg/biz/v2/entity-person-sample
 
 # TEST ENVIRONMENT (with PKI digital signature)
-MYINFOBIZ_AUTH_LEVEL=L1
+MYINFOBIZ_AUTH_LEVEL=L2
 MYINFOBIZ_API_AUTHORISE=https://test.api.myinfo.gov.sg/biz/v2/authorise
 MYINFOBIZ_API_TOKEN=https://test.api.myinfo.gov.sg/biz/v2/token
 MYINFOBIZ_API_ENTITYPERSON=https://test.api.myinfo.gov.sg/biz/v2/entity-person
