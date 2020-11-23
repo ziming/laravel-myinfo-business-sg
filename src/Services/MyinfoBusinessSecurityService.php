@@ -99,11 +99,10 @@ final class MyinfoBusinessSecurityService
         $timestamp = (int) round(microtime(true) * 1000);
 
         $defaultApexHeaders = [
-            'apex_l2_eg_app_id' => $appId,
-            'apex_l2_eg_nonce' => $nonce,
-            'apex_l2_eg_signature_method' => 'SHA256withRSA',
-            'apex_l2_eg_timestamp' => $timestamp,
-            'apex_l2_eg_version' => '1.0',
+            'app_id'=> $appId,
+            'nonce' => $nonce,
+            'signature_method' => 'RS256',
+            'timestamp' => $timestamp,
         ];
 
         if ($method === 'POST' && $contentType !== 'application/x-www-form-urlencoded') {
@@ -115,6 +114,8 @@ final class MyinfoBusinessSecurityService
 
         $baseParamsStr = http_build_query($baseParams);
         $baseParamsStr = urldecode($baseParamsStr);
+
+        $url = str_replace($url, '.api.gov.sg', '.e.api.gov.sg');
 
         $baseString = "{$method}&{$url}&{$baseParamsStr}";
 
