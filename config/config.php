@@ -4,7 +4,7 @@ use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\CallMyinfoBusinessAuthoriseA
 use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\GetMyinfoBusinessEntityPersonDataController;
 
 return [
-    'client_id'     => env('MYINFOBIZ_APP_CLIENT_ID', 'STG2-MYINFO-SELF-TEST'),
+    'client_id'     => env('MYINFOBIZ_APP_CLIENT_ID', 'STG2-MYINFOBIZ-SELF-TEST'),
     'client_secret' => env('MYINFOBIZ_APP_CLIENT_SECRET', '44d953c796cccebcec9bdc826852857ab412fbe2'),
     'redirect_url'  => env('MYINFOBIZ_APP_REDIRECT_URL', 'http://localhost:3001/callback'),
     'realm'         => env('MYINFOBIZ_APP_REALM', 'http://localhost:3001'),

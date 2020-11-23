@@ -128,13 +128,11 @@ final class MyinfoBusinessSecurityService
 
         $signature = base64_encode($signature);
 
-        $strApexHeader = 'apex_l2_eg realm="' . $realm . // Defaults to 1st part of incoming request hostname
-            '",apex_l2_eg_timestamp="' . $timestamp .
-            '",apex_l2_eg_nonce="' . $nonce .
-            '",apex_l2_eg_app_id="' . $appId .
-            '",apex_l2_eg_signature_method="SHA256withRSA"' .
-            ',apex_l2_eg_version="1.0"' .
-            ',apex_l2_eg_signature="' . $signature .
+        $strApexHeader = 'PKI_SIGN timestamp="' . $timestamp .
+            '",nonce="' . $nonce .
+            '",app_id="' . $appId .
+            '",signature_method="RS256"'.
+            '",signature="' . $signature .
             '"';
 
         return $strApexHeader;

@@ -27,29 +27,29 @@ The values provided below are the ones provided in the official MyInfo nodejs tu
 Change them to the values you are given for your app.
 
 ```.dotenv
-MYINFOBIZ_APP_CLIENT_ID=STG2-MYINFO-SELF-TEST
+MYINFOBIZ_APP_CLIENT_ID=STG2-MYINFOBIZ-SELF-TEST
 MYINFOBIZ_APP_CLIENT_SECRET=44d953c796cccebcec9bdc826852857ab412fbe2
 MYINFOBIZ_APP_REDIRECT_URL=http://localhost:3001/callback
 MYINFOBIZ_APP_REALM=http://localhost:3001
 MYINFOBIZ_APP_PURPOSE="demonstrating MyInfo Business APIs"
 MYINFOBIZ_APP_ATTRIBUTES=name,sex,race,nationality,dob,regadd,housingtype,email,mobileno,marital,edulevel,basic-profile,addresses,appointments
 
-MYINFOBIZ_APP_SIGNATURE_CERT_PRIVATE_KEY=file:///Users/your-username/your-laravel-app/storage/myinfo-business-ssl/stg-demoapp-client-privatekey-2018.pem
+MYINFOBIZ_APP_SIGNATURE_CERT_PRIVATE_KEY=file:///Users/your-username/your-laravel-app/storage/myinfo-business-ssl/demoapp-client-privatekey-2018.pem
 MYINFOBIZ_SIGNATURE_CERT_PUBLIC_CERT=file:///Users/your-username/your-laravel-app/storage/myinfo-business-ssl/staging_myinfo_public_cert.cer
 
 MYINFOBIZ_DEBUG_MODE=false
 
 # SANDBOX ENVIRONMENT (no PKI digital signature)
 MYINFOBIZ_AUTH_LEVEL=L0
-MYINFOBIZ_API_AUTHORISE='https://sandbox.api.myinfo.gov.sg/biz/v1/authorise'
-MYINFOBIZ_API_TOKEN='https://sandbox.api.myinfo.gov.sg/biz/v1/v1/token'
-MYINFOBIZ_API_ENTITYPERSON='https://sandbox.api.myinfo.gov.sg/biz/v1/entity-person'
+MYINFOBIZ_API_AUTHORISE=https://sandbox.api.myinfo.gov.sg/biz/v2/authorise
+MYINFOBIZ_API_TOKEN=https://sandbox.api.myinfo.gov.sg/biz/v2/token
+MYINFOBIZ_API_ENTITYPERSON=https://sandbox.api.myinfo.gov.sg/biz/v2/entity-person-sample
 
 # TEST ENVIRONMENT (with PKI digital signature)
 MYINFOBIZ_AUTH_LEVEL=L1
-MYINFOBIZ_API_AUTHORISE='https://test.api.myinfo.gov.sg/biz/v1/authorise'
-MYINFOBIZ_API_TOKEN='https://test.api.myinfo.gov.sg/biz/v1/token'
-MYINFOBIZ_API_ENTITYPERSON='https://test.api.myinfo.gov.sg/biz/v1/entity-person'
+MYINFOBIZ_API_AUTHORISE=https://test.api.myinfo.gov.sg/biz/v2/authorise
+MYINFOBIZ_API_TOKEN=https://test.api.myinfo.gov.sg/biz/v2/token
+MYINFOBIZ_API_ENTITYPERSON=https://test.api.myinfo.gov.sg/biz/v2/entity-person
 
 # Controller URI Paths. IMPORTANT
 MYINFOBIZ_CALL_AUTHORISE_API_URL=/redirect-to-singpass
