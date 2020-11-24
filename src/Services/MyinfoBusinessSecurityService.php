@@ -133,7 +133,7 @@ final class MyinfoBusinessSecurityService
             '",nonce="' . $nonce .
             '",app_id="' . $appId .
             '",signature_method="RS256"'.
-            '",signature="' . $signature .
+            ',signature="' . $signature .
             '"';
 
         return $strApexHeader;
