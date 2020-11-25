@@ -129,12 +129,12 @@ final class MyinfoBusinessSecurityService
 
         $signature = base64_encode($signature);
 
-        $strApexHeader = 'PKI_SIGN timestamp="' . $timestamp .
-            '",nonce="' . $nonce .
-            '",app_id="' . $appId .
-            '",signature_method="RS256"'.
-            '",signature="' . $signature .
-            '"';
+        $strApexHeader = "PKI_SIGN timestamp=\"" . $timestamp .
+            "\",nonce=\"" . $nonce .
+            "\",app_id=\"" . $appId .
+            "\",signature_method=\"RS256\"" .
+            ",signature=\"" . $signature .
+            "\"";
 
         return $strApexHeader;
     }
