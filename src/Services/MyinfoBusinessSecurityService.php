@@ -115,8 +115,6 @@ final class MyinfoBusinessSecurityService
         $baseParamsStr = http_build_query($baseParams);
         $baseParamsStr = urldecode($baseParamsStr);
 
-        $url = str_replace($url, '.api.gov.sg', '.e.api.gov.sg');
-
         $baseString = "{$method}&{$url}&{$baseParamsStr}";
 
         if (config('laravel-myinfo-business-sg.debug_mode')) {
