@@ -99,23 +99,24 @@ class LaravelMyinfoBusinessSg
             Log::debug('Web Request URL: '.config('laravel-myinfo-business-sg.api_token_url'));
         }
 
-        $authHeaders = MyinfoBusinessSecurityService::generateAuthorizationHeader(
-            config('laravel-myinfo-business-sg.api_token_url'),
-            $params,
-            $method,
-            $contentType,
-            config('laravel-myinfo-business-sg.auth_level'),
-            config('laravel-myinfo-business-sg.client_id'),
-            config('laravel-myinfo-business-sg.client_secret'),
-            config('laravel-myinfo-business-sg.realm')
-        );
+        if (config('laravel-myinfo-business-sg.auth_level') === 'L2') {
+            $authHeaders = MyinfoBusinessSecurityService::generateAuthorizationHeader(
+                config('laravel-myinfo-business-sg.api_token_url'),
+                $params,
+                $method,
+                $contentType,
+                config('laravel-myinfo-business-sg.auth_level'),
+                config('laravel-myinfo-business-sg.client_id'),
+                config('laravel-myinfo-business-sg.client_secret'),
+                config('laravel-myinfo-business-sg.realm')
+            );
 
-        $headers['Authorization'] = $authHeaders;
+            $headers['Authorization'] = $authHeaders;
 
-        if (config('laravel-myinfo-business-sg.debug_mode')) {
-            Log::debug('Authorization Header: '.$authHeaders);
+            if (config('laravel-myinfo-business-sg.debug_mode')) {
+                Log::debug('Authorization Header: '.$authHeaders);
+            }
         }
-
 
         $response = $guzzleClient->post(config('laravel-myinfo-business-sg.api_token_url'), [
             'form_params' => $params,
