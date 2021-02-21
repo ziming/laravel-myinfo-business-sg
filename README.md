@@ -1,8 +1,6 @@
 # Laravel MyInfo Singapore
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
-[![Quality Score](https://img.shields.io/scrutinizer/g/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://scrutinizer-ci.com/g/ziming/laravel-myinfo-business-sg)
-[![Total Downloads](https://img.shields.io/packagist/dt/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/ziming/laravel-myinfo-business-sg)
 
 PHP Laravel Package for MyInfo Business Singapore. 
@@ -222,12 +220,7 @@ support below:
 - https://www.sos.org.sg (Samaritans of Singapore)
 - https://sg.yougov.com/en-sg/refer/X_TOE4BGGtrAFuhX0ZNq9w/ (YouGov Surveys)
 - https://www.argumentninja.com/a/p78lj (Argument Ninja Dojo Course)
-- https://www.humblebundle.com/monthly?refc=vOZEog (Humble Monthly Referral)
 - https://www.giving.sg (Giving.sg)
 
 
 [![We offset our carbon footprint via Offset Earth](https://toolkit.offset.earth/carbonpositiveworkforce/badge/5e186e68516eb60018c5172b?black=true&landscape=true)](https://plant.treeware.earth/ziming/laravel-myinfo-business-sg)
-
-### Paid Support
-
-If for some reasons you need more urgent help with MyInfo integration but I'm busy, you may contact me at the email specified in composer.json for possible paid help.
