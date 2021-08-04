@@ -68,7 +68,7 @@ php artisan vendor:publish --provider="Ziming\LaravelMyinfoBusinessSg\LaravelMyi
 
 ## Usage and Customisations
 
-When building your button to redirect to SingPass. It should link to `route('myinfo.singpass')`
+When building your button to redirect to SingPass. It should link to `route('myinfo-business.singpass')`
 
 After SingPass redirects back to your Callback URI, you should make a post request to `route('myinfo.person')`
 
