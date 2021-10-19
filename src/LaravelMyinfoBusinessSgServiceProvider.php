@@ -32,7 +32,8 @@ class LaravelMyinfoBusinessSgServiceProvider extends ServiceProvider
             ->middleware('web');
 
         Route::post(config('laravel-myinfo-business-sg.get_myinfo_person_data_url'), config('laravel-myinfo-business-sg.get_myinfo_person_data_controller'))
-            ->name('myinfo-business.entity-person');
+            ->name('myinfo-business.entity-person')
+            ->middleware('web');
     }
 
     /**
