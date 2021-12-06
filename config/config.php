@@ -20,11 +20,11 @@ return [
     'api_token_url'     => env('MYINFOBIZ_API_TOKEN'),
     'api_entity_person_url'    => env('MYINFOBIZ_API_ENTITYPERSON'),
 
-    // If this is false, call_authorise_api_url and get_myinfo_person_data_url routes would not be registered
+    // If this is false, call_authorise_api_url and get_myinfo_entity_person_data_url routes would not be registered
     'enable_default_myinfo_business_routes' => true,
 
     'call_authorise_api_url' => env('MYINFOBIZ_CALL_AUTHORISE_API_URL', '/redirect-to-myinfo-business-singpass'),
-    'get_myinfo_person_data_url' => env('MYINFOBIZ_GET_ENTITY_PERSON_DATA_URL', '/myinfo-entity-person'),
+    'get_myinfo_entity_person_data_url' => env('MYINFOBIZ_GET_ENTITY_PERSON_DATA_URL', '/myinfo-entity-person'),
 
     // The default controllers used my the default provided myinfo routes.
     'call_authorise_api_controller' => CallMyinfoBusinessAuthoriseApiController::class,
