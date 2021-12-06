@@ -28,7 +28,7 @@ return [
 
     // The default controllers used my the default provided myinfo routes.
     'call_authorise_api_controller' => CallMyinfoBusinessAuthoriseApiController::class,
-    'get_myinfo_person_data_controller' => GetMyinfoBusinessEntityPersonDataController::class,
+    'get_myinfo_entity_person_data_controller' => GetMyinfoBusinessEntityPersonDataController::class,
 
     // Debug mode
     'debug_mode' => env('MYINFOBIZ_DEBUG_MODE', false),
