@@ -23,7 +23,7 @@ class LaravelMyinfoBusinessSgServiceProvider extends ServiceProvider
             ], 'myinfo-business-ssl');
         }
 
-        if (! config('laravel-myinfo-business-sg.enable_default_myinfo_routes')) {
+        if (! config('laravel-myinfo-business-sg.enable_default_myinfo_business_routes')) {
             return;
         }
 

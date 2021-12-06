@@ -72,7 +72,7 @@ When building your button to redirect to SingPass. It should link to `route('myi
 
 After SingPass redirects back to your Callback URI, you should make a post request to `route('myinfo.person')`
 
-If you prefer to not use the default routes provided you may set `enable_default_myinfo_routes` to `false` in 
+If you prefer to not use the default routes provided you may set `enable_default_myinfo_business_routes` to `false` in 
 `config/laravel-myinfo-business-sg.php` and map your own routes. This package controllers will still be accessible as shown
 in the example below:
 
