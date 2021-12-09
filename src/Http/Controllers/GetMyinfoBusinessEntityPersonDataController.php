@@ -12,8 +12,6 @@ class GetMyinfoBusinessEntityPersonDataController extends Controller
     /**
      * Fetch MyInfo Entity Person Data after authorization code is given back.
      *
-     * @param Request $request
-     * @param LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -27,20 +25,16 @@ class GetMyinfoBusinessEntityPersonDataController extends Controller
 
         $code = $request->input('code');
 
-        $personData = $LaravelMyinfoBusinessSg->getMyinfoEntityPersonData($code);
+        $entityPersonData = $LaravelMyinfoBusinessSg->getMyinfoEntityPersonData($code);
 
-        $this->preResponseHook($request, $personData);
+        $this->preResponseHook($request, $entityPersonData);
 
-        return response()->json($personData);
+        return response()->json($entityPersonData);
     }
 
-    /**
-     * @param Request $request
-     * @param array $personData
-     */
-    protected function preResponseHook(Request $request, array $personData)
+    protected function preResponseHook(Request $request, array $entityPersonData)
     {
-        // Extend this class, override this method.
+        // Extend this class, override this template method.
         // And do your logging and whatever stuffs here if needed.
         // person information is in the 'data' key of $personData array.
     }

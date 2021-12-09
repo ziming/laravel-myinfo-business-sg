@@ -185,11 +185,11 @@ return redirect(LaravelMyinfoBusinessSg::generateAuthoriseApiUrl($state));
 <?php
 use Ziming\LaravelMyinfoBusinessSg\LaravelMyinfoBusinessSgFacade as LaravelMyinfoBusinessSg;
 
-// Get the Myinfo person data in an array with 'data' key
-$personData = LaravelMyinfoBusinessSg::getMyinfoEntityPersonData($code);
+// Get the Myinfo Business data in an array with 'data' key
+$entityPersonData = LaravelMyinfoBusinessSg::getMyinfoEntityPersonData($code);
 
 // If you didn't want to return a json response with the person information in the 'data' key. You can do this
-return response()->json($personData['data']);
+return response()->json($entityPersonData['data']);
 ```
 
 You may also choose to subclass `GetMyinfoEntityPersonDataController` and override its `preResponseHook()` template method to
