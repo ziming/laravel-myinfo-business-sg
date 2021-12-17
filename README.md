@@ -1,6 +1,7 @@
 # Laravel MyInfo Singapore
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
+[![Total Downloads](https://img.shields.io/packagist/dt/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/ziming/laravel-myinfo-business-sg)
 
 PHP Laravel Package for MyInfo Business Singapore. 
@@ -213,14 +214,3 @@ You can buy trees here [offset.earth/treeware](https://plant.treeware.earth/zimi
 ### Other ways of Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-Rather than donating to support me, you may use 1 the referral links to the following products, services or charities that I 
-support below:
-
-- https://www.sos.org.sg (Samaritans of Singapore)
-- https://sg.yougov.com/en-sg/refer/X_TOE4BGGtrAFuhX0ZNq9w/ (YouGov Surveys)
-- https://www.argumentninja.com/a/p78lj (Argument Ninja Dojo Course)
-- https://www.giving.sg (Giving.sg)
-
-
-[![We offset our carbon footprint via Offset Earth](https://toolkit.offset.earth/carbonpositiveworkforce/badge/5e186e68516eb60018c5172b?black=true&landscape=true)](https://plant.treeware.earth/ziming/laravel-myinfo-business-sg)
