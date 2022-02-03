@@ -6,8 +6,6 @@
 
 PHP Laravel Package for MyInfo Business Singapore. 
 
-**This is adapted from my MyInfo Package without testing. Please give feedback if you did**
-
 <a href="https://business.myinfo.gov.sg/" rel="noreferrer nofollow">Official MyInfo Business Docs</a>
 
 ## Installation
