@@ -8,10 +8,7 @@ class InvalidDataOrSignatureForEntityPersonDataException extends HttpException
 {
     /**
      * InvalidDataOrSignatureForPersonDataException constructor.
-     * @param int $statusCode
-     * @param string $message
      * @param \Exception|null $previous
-     * @param array $headers
      * @param int $code
      */
     public function __construct(int $statusCode = 500, string $message = 'Invalid Data or Signature for Person Data', \Exception $previous = null, array $headers = [], ?int $code = 0)

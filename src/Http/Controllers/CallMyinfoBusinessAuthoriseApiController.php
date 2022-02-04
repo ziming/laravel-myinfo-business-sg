@@ -14,11 +14,9 @@ class CallMyinfoBusinessAuthoriseApiController extends Controller
     /**
      * Redirects to Singpass for user to give permission to fetch MyInfo Data.
      *
-     * @param LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function __invoke(Request $request, LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg)
+    public function __invoke(Request $request, LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
         $state = Str::random(40);
         $authoriseApiUrl = $LaravelMyinfoBusinessSg->generateAuthoriseApiUrl($state);

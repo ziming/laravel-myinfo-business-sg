@@ -24,7 +24,6 @@ final class MyinfoBusinessSecurityService
     /**
      * Verify JWS.
      *
-     * @param  string  $accessToken
      * @return mixed|null
      * @throws \Exception
      */
@@ -38,21 +37,12 @@ final class MyinfoBusinessSecurityService
         $jws = $serializerManager->unserialize($accessToken);
         $verified = $jwsVerifier->verifyWithKey($jws, $jwk, 0);
 
-        return $verified ? json_decode($jws->getPayload(), true) : null;
+        return $verified ? json_decode($jws->getPayload(), true, 512, JSON_THROW_ON_ERROR) : null;
     }
 
     /**
      * Generate Authorization Header.
      *
-     * @param  string  $url
-     * @param  array  $params
-     * @param  string  $method
-     * @param  string  $contentType
-     * @param  string  $authType
-     * @param  string  $appId
-     * @param  string  $passphrase
-     * @param  string  $realm
-     * @return string
      * @throws \Exception
      */
     public static function generateAuthorizationHeader(
@@ -75,13 +65,6 @@ final class MyinfoBusinessSecurityService
     /**
      * Generate SHA256 with RSA Header.
      *
-     * @param  string  $url
-     * @param  array  $params
-     * @param  string  $method
-     * @param  string  $contentType
-     * @param  string  $appId
-     * @param  string  $passphrase
-     * @param  string  $realm
      * @return string
      * @throws \Exception
      */
@@ -138,8 +121,6 @@ final class MyinfoBusinessSecurityService
     }
 
     /**
-     * @param  string  $personDataToken
-     * @param  string  $privateKeyPath
      * @return string
      * @throws \Exception
      */

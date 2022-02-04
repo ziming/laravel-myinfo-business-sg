@@ -16,8 +16,6 @@ class LaravelMyinfoBusinessSg
 {
     /**
      * Generate MyInfo Authorise API URI to redirect to.
-     * @param  string  $state
-     * @return string
      */
     public function generateAuthoriseApiUrl(string $state): string
     {
@@ -39,11 +37,9 @@ class LaravelMyinfoBusinessSg
     /**
      * Everything below will be related to Getting MyInfo Person Data.
      */
-
     /**
      * Get MyInfo Entity Person Data in an array with a 'data' key.
      *
-     * @param  string  $code
      * @return array The Entity and/or Person Data
      * @throws \Exception
      */
@@ -54,7 +50,7 @@ class LaravelMyinfoBusinessSg
         $tokenRequestResponseBody = $tokenRequestResponse->getBody();
 
         if ($tokenRequestResponseBody) {
-            $decoded = json_decode($tokenRequestResponseBody, true);
+            $decoded = json_decode($tokenRequestResponseBody, true, 512, JSON_THROW_ON_ERROR);
 
             if ($decoded) {
                 return $this->callEntityPersonApi($decoded['access_token']);
@@ -67,7 +63,6 @@ class LaravelMyinfoBusinessSg
     /**
      * Create Token Request.
      *
-     * @param string $code
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \Exception
      */
@@ -152,7 +147,7 @@ class LaravelMyinfoBusinessSg
         $personRequestResponseContent = $personRequestResponseBody->getContents();
 
         if ($personRequestResponseContent) {
-            $personData = json_decode($personRequestResponseContent, true);
+            $personData = json_decode($personRequestResponseContent, true, 512, JSON_THROW_ON_ERROR);
 
             $authLevel = config('laravel-myinfo-business-sg.auth_level');
 
@@ -190,8 +185,6 @@ class LaravelMyinfoBusinessSg
     /**
      * Create Entity Person Request.
      *
-     * @param string $sub
-     * @param string $validAccessToken
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \Exception
      */

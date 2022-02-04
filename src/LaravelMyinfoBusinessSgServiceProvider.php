@@ -45,8 +45,6 @@ class LaravelMyinfoBusinessSgServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-myinfo-business-sg');
 
         // Register the main class to use with the facade
-        $this->app->singleton('laravel-myinfo-business-sg', function () {
-            return new LaravelMyinfoBusinessSg;
-        });
+        $this->app->singleton('laravel-myinfo-business-sg', fn() => new LaravelMyinfoBusinessSg);
     }
 }
