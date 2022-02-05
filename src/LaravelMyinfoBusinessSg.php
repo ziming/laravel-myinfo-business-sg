@@ -50,7 +50,7 @@ class LaravelMyinfoBusinessSg
         $tokenRequestResponseBody = $tokenRequestResponse->getBody();
 
         if ($tokenRequestResponseBody) {
-            $decoded = json_decode($tokenRequestResponseBody, true, 512, JSON_THROW_ON_ERROR);
+            $decoded = json_decode($tokenRequestResponseBody, true);
 
             if ($decoded) {
                 return $this->callEntityPersonApi($decoded['access_token']);
@@ -147,7 +147,7 @@ class LaravelMyinfoBusinessSg
         $personRequestResponseContent = $personRequestResponseBody->getContents();
 
         if ($personRequestResponseContent) {
-            $personData = json_decode($personRequestResponseContent, true, 512, JSON_THROW_ON_ERROR);
+            $personData = json_decode($personRequestResponseContent, true);
 
             $authLevel = config('laravel-myinfo-business-sg.auth_level');
 
