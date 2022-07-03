@@ -14,6 +14,8 @@ return [
 
     'public_cert_path' => env('MYINFOBIZ_SIGNATURE_CERT_PUBLIC_CERT'),
     'private_key_path' => env('MYINFOBIZ_APP_SIGNATURE_CERT_PRIVATE_KEY'),
+    'public_cert_content' => env('MYINFOBIZ_SIGNATURE_CERT_PUBLIC_CERT_CONTENT'),
+    'private_key_content' => env('MYINFOBIZ_APP_SIGNATURE_CERT_PRIVATE_KEY_CONTENT'),
 
     'auth_level'        => env('MYINFOBIZ_AUTH_LEVEL'),
     'api_authorise_url' => env('MYINFOBIZ_API_AUTHORISE'),

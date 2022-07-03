@@ -30,7 +30,13 @@ final class MyinfoBusinessSecurityService
     public static function verifyJWS(string $accessToken)
     {
         $algorithmManager = new AlgorithmManager([new RS256]);
-        $jwk = JWKFactory::createFromCertificateFile(config('laravel-myinfo-business-sg.public_cert_path'));
+
+        if (config('laravel-myinfo-business-sg.public_cert_content')) {
+            $jwk = JWKFactory::createFromKey(config('laravel-myinfo-business-sg.public_cert_content'));
+        } else {
+            $jwk = JWKFactory::createFromCertificateFile(config('laravel-myinfo-business-sg.public_cert_path'));
+        }
+
         $jwsVerifier = new JWSVerifier($algorithmManager);
         $serializerManager = new JWSSerializerManager([new CompactSerializer]);
 
@@ -104,7 +110,11 @@ final class MyinfoBusinessSecurityService
             Log::debug('Base String (Pre Signing): '.$baseString);
         }
 
-        $privateKey = openssl_pkey_get_private(config('laravel-myinfo-business-sg.private_key_path'), $passphrase);
+        if (config('laravel-myinfo-business-sg.private_key_content')) {
+            $privateKey = openssl_pkey_get_private(config('laravel-myinfo-business-sg.private_key_content'), $passphrase);
+        } else {
+            $privateKey = openssl_pkey_get_private(config('laravel-myinfo-business-sg.private_key_path'), $passphrase);
+        }
 
         openssl_sign($baseString, $signature, $privateKey, 'sha256WithRSAEncryption');
 
@@ -126,10 +136,17 @@ final class MyinfoBusinessSecurityService
      */
     public static function decryptJWE(string $personDataToken, string $privateKeyPath)
     {
-        $jwk = JWKFactory::createFromKeyFile(
-            $privateKeyPath,
-            config('laravel-myinfo-business-sg.client_secret')
-        );
+        if (config('laravel-myinfo-business-sg.private_key_content')) {
+            $jwk = JWKFactory::createFromKey(
+                config('laravel-myinfo-business-sg.private_key_content'),
+                config('laravel-myinfo-business-sg.client_secret')
+            );
+        } else {
+            $jwk = JWKFactory::createFromKeyFile(
+                $privateKeyPath,
+                config('laravel-myinfo-business-sg.client_secret')
+            );
+        }
 
         $serializerManager = new JWESerializerManager([
             new \Jose\Component\Encryption\Serializer\CompactSerializer,
