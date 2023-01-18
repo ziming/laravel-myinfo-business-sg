@@ -131,10 +131,9 @@ final class MyinfoBusinessSecurityService
     }
 
     /**
-     * @return string
      * @throws \Exception
      */
-    public static function decryptJWE(string $personDataToken, string $privateKeyPath)
+    public static function decryptJWE(string $personDataToken): ?string
     {
         if (config('laravel-myinfo-business-sg.private_key_content')) {
             $jwk = JWKFactory::createFromKey(
@@ -143,7 +142,7 @@ final class MyinfoBusinessSecurityService
             );
         } else {
             $jwk = JWKFactory::createFromKeyFile(
-                $privateKeyPath,
+                config('laravel-myinfo-business-sg.private_key_path'),
                 config('laravel-myinfo-business-sg.client_secret')
             );
         }
@@ -172,8 +171,6 @@ final class MyinfoBusinessSecurityService
 
         $payload = $jwe->getPayload();
 
-        $payload = str_replace('"', '', $payload);
-
-        return $payload;
+        return str_replace('"', '', $payload);
     }
 }

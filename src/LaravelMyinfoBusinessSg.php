@@ -172,7 +172,6 @@ class LaravelMyinfoBusinessSg
 
                 $personDataJWS = MyinfoBusinessSecurityService::decryptJWE(
                     $personData,
-                    config('laravel-myinfo-business-sg.private_key_path')
                 );
 
                 if ($personDataJWS === null) {
