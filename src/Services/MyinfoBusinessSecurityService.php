@@ -23,11 +23,9 @@ final class MyinfoBusinessSecurityService
 {
     /**
      * Verify JWS.
-     *
-     * @return mixed|null
      * @throws \Exception
      */
-    public static function verifyJWS(string $accessToken)
+    public static function verifyJWS(string $accessToken): mixed
     {
         $algorithmManager = new AlgorithmManager([new RS256]);
 
@@ -70,8 +68,6 @@ final class MyinfoBusinessSecurityService
 
     /**
      * Generate SHA256 with RSA Header.
-     *
-     * @return string
      * @throws \Exception
      */
     private static function generateSHA256withRSAHeader(
@@ -82,7 +78,7 @@ final class MyinfoBusinessSecurityService
         string $appId,
         string $passphrase,
         string $realm
-    ) {
+    ): string {
         $nonce = random_int(PHP_INT_MIN, PHP_INT_MAX);
 
         $timestamp = (int) round(microtime(true) * 1000);

@@ -2,9 +2,10 @@
 
 namespace Ziming\LaravelMyinfoBusinessSg;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\ResponseInterface;
 use Ziming\LaravelMyinfoBusinessSg\Exceptions\AccessTokenNotFoundException;
 use Ziming\LaravelMyinfoBusinessSg\Exceptions\InvalidAccessTokenException;
 use Ziming\LaravelMyinfoBusinessSg\Exceptions\InvalidDataOrSignatureForEntityPersonDataException;
@@ -57,7 +58,7 @@ class LaravelMyinfoBusinessSg
      * @return array The Entity and/or Person Data
      * @throws \Exception
      */
-    public function getMyinfoEntityPersonData(string $code)
+    public function getMyinfoEntityPersonData(string $code): array
     {
         $tokenRequestResponse = $this->createTokenRequest($code);
 
@@ -135,12 +136,9 @@ class LaravelMyinfoBusinessSg
 
     /**
      * Call Entity Person API.
-     *
-     * @param $accessToken
-     * @return array
      * @throws \Exception
      */
-    private function callEntityPersonApi($accessToken)
+    private function callEntityPersonApi(string $accessToken): array
     {
         $decoded = MyinfoBusinessSecurityService::verifyJWS($accessToken);
 
@@ -195,11 +193,9 @@ class LaravelMyinfoBusinessSg
 
     /**
      * Create Entity Person Request.
-     *
-     * @return \Psr\Http\Message\ResponseInterface
      * @throws \Exception
      */
-    private function createEntityPersonRequest(string $sub, string $validAccessToken)
+    private function createEntityPersonRequest(string $sub, string $validAccessToken): ResponseInterface
     {
         [$uen, $uinfin] = explode('_', $sub);
 
@@ -256,7 +252,7 @@ class LaravelMyinfoBusinessSg
         return $response;
     }
 
-    public function setAttributes(array|string $attributes)
+    public function setAttributes(array|string $attributes): void
     {
         if (is_string($attributes)) {
             $this->attributes = $attributes;

@@ -2,6 +2,7 @@
 
 namespace Ziming\LaravelMyinfoBusinessSg\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Ziming\LaravelMyinfoBusinessSg\Exceptions\InvalidStateException;
@@ -11,11 +12,9 @@ class GetMyinfoBusinessEntityPersonDataController extends Controller
 {
     /**
      * Fetch MyInfo Entity Person Data after authorization code is given back.
-     *
-     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function __invoke(Request $request, LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg)
+    public function __invoke(Request $request, LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg): JsonResponse
     {
         $state = $request->input('state');
 
