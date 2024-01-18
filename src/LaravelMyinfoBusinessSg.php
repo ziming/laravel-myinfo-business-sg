@@ -260,4 +260,10 @@ class LaravelMyinfoBusinessSg
             $this->attributes = join(',', $attributes);
         }
     }
+
+    public function setRedirectUri(string $redirectUri): static
+    {
+        $this->redirectUri = $redirectUri;
+        return $this;
+    }
 }
