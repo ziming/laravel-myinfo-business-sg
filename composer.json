@@ -13,16 +13,16 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "ext-json": "*",
         "ext-openssl": "*",
         "guzzlehttp/guzzle": "^7.0",
-        "illuminate/contracts": "^9.0||^10.0||^11.0",
-        "web-token/jwt-framework": "^2.2.11||^3.0"
+        "illuminate/contracts": "^11.0",
+        "web-token/jwt-framework": "^3.4.3"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0||^8.0||^9.0",
-        "phpunit/phpunit": "^9.5.1||^10.0||^11.0",
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^10.0||^11.0",
         "rector/rector": "^1.0"
     },
     "autoload": {
