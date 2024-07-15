@@ -18,7 +18,7 @@
         "ext-openssl": "*",
         "guzzlehttp/guzzle": "^7.0",
         "illuminate/contracts": "^11.0",
-        "web-token/jwt-framework": "^3.4.3"
+        "web-token/jwt-framework": "^4.0"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0",

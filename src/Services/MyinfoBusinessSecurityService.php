@@ -147,13 +147,11 @@ final class MyinfoBusinessSecurityService
 
         $jwe = $serializerManager->unserialize($personDataToken);
 
-        $keyEncryptionAlgorithmManager = new AlgorithmManager([new RSAOAEP]);
+        $keyEncryptionAlgorithmManager = new AlgorithmManager([new RSAOAEP, new A256GCM]);
 
-        $contentEncryptionAlgorithmManager = new AlgorithmManager([new A256GCM]);
 
         $jweDecrypter = new JWEDecrypter(
             $keyEncryptionAlgorithmManager,
-            $contentEncryptionAlgorithmManager
         );
 
         $recipient = 0;
