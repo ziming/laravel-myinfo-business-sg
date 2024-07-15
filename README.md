@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
 [![Total Downloads](https://img.shields.io/packagist/dt/ziming/laravel-myinfo-business-sg.svg?style=flat-square)](https://packagist.org/packages/ziming/laravel-myinfo-business-sg)
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/ziming/laravel-myinfo-business-sg)
-[![RINGER](https://www.ringerhq.com/images/get-support-on-ringer.svg)](https://www.ringerhq.com/i/ziming/laravel-myinfo-business-sg)
 
 PHP Laravel Package for MyInfo Business Singapore. 
 
