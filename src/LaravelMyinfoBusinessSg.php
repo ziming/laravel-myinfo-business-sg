@@ -2,6 +2,8 @@
 
 namespace Ziming\LaravelMyinfoBusinessSg;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +19,7 @@ class LaravelMyinfoBusinessSg
 {
     public function __construct(
         private ?string $clientId = null,
-        private ?string $clientSecret = null,
+        #[\SensitiveParameter] private ?string $clientSecret = null,
         private ?string $attributes = null,
         private ?string $purpose = null,
         private ?string $redirectUri = null,
@@ -32,7 +34,9 @@ class LaravelMyinfoBusinessSg
     /**
      * Generate MyInfo Authorise API URI to redirect to.
      */
-    public function generateAuthoriseApiUrl(string $state): string
+    public function generateAuthoriseApiUrl(
+        #[\SensitiveParameter] string $state
+    ): string
     {
         $query = http_build_query([
             'client_id' => $this->clientId,
@@ -56,9 +60,12 @@ class LaravelMyinfoBusinessSg
      * Get MyInfo Entity Person Data in an array with a 'data' key.
      *
      * @return array The Entity and/or Person Data
-     * @throws \Exception
+     * @throws Exception
+     * @throws GuzzleException
      */
-    public function getMyinfoEntityPersonData(string $code): array
+    public function getMyinfoEntityPersonData(
+        #[\SensitiveParameter] string $code
+    ): array
     {
         $tokenRequestResponse = $this->createTokenRequest($code);
 
@@ -76,10 +83,11 @@ class LaravelMyinfoBusinessSg
     /**
      * Create Token Request.
      *
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws \Exception
+     * @throws Exception|GuzzleException
      */
-    private function createTokenRequest(string $code)
+    private function createTokenRequest(
+        #[\SensitiveParameter] string $code
+    ): ResponseInterface
     {
         $guzzleClient = app(Client::class);
 
@@ -126,19 +134,19 @@ class LaravelMyinfoBusinessSg
             }
         }
 
-        $response = $guzzleClient->post(config('laravel-myinfo-business-sg.api_token_url'), [
+        return $guzzleClient->post(config('laravel-myinfo-business-sg.api_token_url'), [
             'form_params' => $params,
             'headers' => $headers,
         ]);
-
-        return $response;
     }
 
     /**
      * Call Entity Person API.
-     * @throws \Exception
+     * @throws Exception
      */
-    private function callEntityPersonApi(string $accessToken): array
+    private function callEntityPersonApi(
+        #[\SensitiveParameter] string $accessToken
+    ): array
     {
         $decoded = MyinfoBusinessSecurityService::verifyJWS($accessToken);
 
@@ -193,9 +201,12 @@ class LaravelMyinfoBusinessSg
 
     /**
      * Create Entity Person Request.
-     * @throws \Exception
+     * @throws Exception
      */
-    private function createEntityPersonRequest(string $sub, string $validAccessToken): ResponseInterface
+    private function createEntityPersonRequest(
+        #[\SensitiveParameter] string $sub,
+        #[\SensitiveParameter] string $validAccessToken
+    ): ResponseInterface
     {
         [$uen, $uinfin] = explode('_', $sub);
 
@@ -244,12 +255,10 @@ class LaravelMyinfoBusinessSg
             Log::debug('Authorization Header: '.$headers['Authorization']);
         }
 
-        $response = $guzzleClient->get($url, [
+        return $guzzleClient->get($url, [
             'query' => $params,
             'headers' => $headers,
         ]);
-
-        return $response;
     }
 
     public function setAttributes(array|string $attributes): void

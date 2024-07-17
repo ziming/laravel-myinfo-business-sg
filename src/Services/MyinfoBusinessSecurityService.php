@@ -23,7 +23,9 @@ final class MyinfoBusinessSecurityService
      * Verify JWS.
      * @throws \Exception
      */
-    public static function verifyJWS(string $accessToken): mixed
+    public static function verifyJWS(
+        string $accessToken
+    ): mixed
     {
         $algorithmManager = new AlgorithmManager([new RS256]);
 
@@ -127,7 +129,10 @@ final class MyinfoBusinessSecurityService
     /**
      * @throws \Exception
      */
-    public static function decryptJWE(string $personDataToken): ?string
+    public static function decryptJWE(
+
+        string $personDataToken
+    ): ?string
     {
         if (config('laravel-myinfo-business-sg.private_key_content')) {
             $jwk = JWKFactory::createFromKey(
