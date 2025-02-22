@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ziming\LaravelMyinfoBusinessSg;
 
 use Illuminate\Support\Facades\Facade;
@@ -9,12 +11,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class LaravelMyinfoBusinessSgFacade extends Facade
 {
-    /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'laravel-myinfo-business-sg';
     }

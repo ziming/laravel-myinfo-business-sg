@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ziming\LaravelMyinfoBusinessSg;
 
 use Exception;
@@ -70,7 +72,7 @@ class LaravelMyinfoBusinessSg
         $tokenRequestResponse = $this->createTokenRequest($code);
 
         if ($tokenRequestResponseBody = $tokenRequestResponse->getBody()) {
-            $decoded = json_decode($tokenRequestResponseBody, true);
+            $decoded = json_decode((string) $tokenRequestResponseBody, true);
 
             if ($decoded) {
                 return $this->callEntityPersonApi($decoded['access_token']);

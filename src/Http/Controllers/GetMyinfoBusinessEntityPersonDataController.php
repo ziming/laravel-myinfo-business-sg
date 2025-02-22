@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ziming\LaravelMyinfoBusinessSg\Http\Controllers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,7 +15,7 @@ class GetMyinfoBusinessEntityPersonDataController extends Controller
 {
     /**
      * Fetch MyInfo Entity Person Data after authorization code is given back.
-     * @throws \Exception
+     * @throws \Exception|GuzzleException
      */
     public function __invoke(Request $request, LaravelMyinfoBusinessSg $LaravelMyinfoBusinessSg): JsonResponse
     {

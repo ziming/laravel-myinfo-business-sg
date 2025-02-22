@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ziming\LaravelMyinfoBusinessSg\Services;
 
 use Illuminate\Support\Facades\Log;

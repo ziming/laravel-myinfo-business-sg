@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ziming\LaravelMyinfoBusinessSg;
 
 use Illuminate\Support\Facades\Route;
@@ -7,10 +9,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelMyinfoBusinessSgServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -36,10 +35,7 @@ class LaravelMyinfoBusinessSgServiceProvider extends ServiceProvider
             ->middleware('web');
     }
 
-    /**
-     * Register the application services.
-     */
-    public function register()
+    public function register(): void
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-myinfo-business-sg');

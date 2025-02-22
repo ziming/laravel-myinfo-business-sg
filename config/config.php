@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\CallMyinfoBusinessAuthoriseApiController;
 use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\GetMyinfoBusinessEntityPersonDataController;
 
