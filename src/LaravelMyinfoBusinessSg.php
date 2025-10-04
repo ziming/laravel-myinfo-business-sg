@@ -20,6 +20,7 @@ use Ziming\LaravelMyinfoBusinessSg\Services\MyinfoBusinessSecurityService;
 class LaravelMyinfoBusinessSg
 {
     public function __construct(
+        #[\SensitiveParameter]
         private ?string $clientId = null,
         #[\SensitiveParameter] private ?string $clientSecret = null,
         private ?string $attributes = null,
