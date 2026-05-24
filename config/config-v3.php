@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\CallAuthorizationApiV3Controller;
-use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\PublicJwksV3Controller;
+use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\MyinfoBusinessV3\CallAuthorizationApiController;
+use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\MyinfoBusinessV3\PublicJwksController;
 
 return [
     // CorpPass OpenID Provider (FAPI 2.0)
@@ -31,12 +31,12 @@ return [
     // If this is false, the call_authorization_api_uri route would not be registered
     'enable_default_myinfo_authorization_redirect_route' => env('MYINFOBIZ_V3_ENABLE_DEFAULT_MYINFO_AUTHORIZATION_REDIRECT_ROUTE', false),
     'call_authorization_api_uri' => env('MYINFOBIZ_V3_CALL_AUTHORIZATION_API_URI', '/redirect-to-corppass-v3'),
-    'call_authorization_api_controller' => CallAuthorizationApiV3Controller::class,
+    'call_authorization_api_controller' => CallAuthorizationApiController::class,
 
     // If this is false, the public_jwks_uri route would not be registered
     'enable_default_public_jwks_endpoint_route' => env('MYINFOBIZ_V3_ENABLE_DEFAULT_PUBLIC_JWKS_ENDPOINT_ROUTE', false),
     'public_jwks_uri' => env('MYINFOBIZ_V3_PUBLIC_JWKS_URI', '/cp/v3/jwks'),
-    'public_jwks_controller' => PublicJwksV3Controller::class,
+    'public_jwks_controller' => PublicJwksController::class,
 
     // Debug mode
     'debug_mode' => env('MYINFOBIZ_V3_DEBUG_MODE', false),
