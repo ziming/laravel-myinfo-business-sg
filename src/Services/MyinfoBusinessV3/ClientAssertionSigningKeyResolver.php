@@ -24,7 +24,7 @@ class ClientAssertionSigningKeyResolver
         );
 
         if (! $privateJwks instanceof JWKSet) {
-            throw new \RuntimeException('Expected a JWKS for v6 private_jwks');
+            throw new \RuntimeException('Expected a JWKS for laravel-myinfo-business-sg-v3.private_jwks');
         }
 
         $signingJwk = self::resolveSigningJwk($privateJwks);
@@ -69,7 +69,7 @@ class ClientAssertionSigningKeyResolver
             0 => throw new \RuntimeException('No signing key found in private JWKS'),
             1 => $signingKeys[0],
             default => throw new \RuntimeException(
-                'Multiple signing keys found; configure MYINFO_V6_CHOSEN_JWKS_SIG_KID'
+                'Multiple signing keys found; configure MYINFOBIZ_V3_CHOSEN_JWKS_SIG_KID'
             ),
         };
     }
