@@ -394,15 +394,18 @@ class CorppassCallbackController
         $code = $request->query('code');
 
         // 1. Exchange the authorization code for a DPoP-bound access token.
+        //    The returned id_token is decrypted, signature-verified and validated
+        //    (iss/aud/exp/nonce/at_hash); an InvalidIdTokenException is thrown on
+        //    failure. The nonce is consumed from the session as part of this step.
         $token = $connector->getAccessToken($code);
         $accessToken = $token['access_token'];
 
         // 2. Fetch the entity-person userinfo (returns a GetEntityPersonResponse).
         $entityPerson = $connector->getEntityPerson($accessToken);
 
-        // 3. Decrypt + verify + claim-check, then read the full claims array.
-        //    Call json() with NO key — the decoded payload is nested, so always pull the
-        //    full array and index into it (json('a.b.c') on a scalar leaf throws a TypeError).
+        // 3. Decrypt + verify + claim-check, then read the claims.
+        //    json() with no key returns the full (nested) claims array; passing a key
+        //    works too — including scalar leaves, e.g. $entityPerson->json('sub').
         $claims = $entityPerson->json();
 
         $entityInfo   = $claims['entity_info']   ?? [];   // business entity (UEN, profile, addresses...)

@@ -36,6 +36,7 @@ class GenerateJwkSetCommand extends Command
         $encJwk = JWKFactory::createECKey(
             'P-256',
             [
+                'alg' => 'ECDH-ES+A256KW',
                 'use' => 'enc',
                 'kid' => 'enc-'.$currentDateTime,
             ]

@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 use Jose\Component\Core\JWK;
 use Jose\Component\KeyManagement\JWKFactory;
 use Saloon\Http\Connector;
+use Ziming\LaravelMyinfoBusinessSg\Exceptions\InvalidIdTokenException;
 use Ziming\LaravelMyinfoBusinessSg\Http\Integrations\MyinfoBusinessV3\Requests\GetAccessTokenRequest;
 use Ziming\LaravelMyinfoBusinessSg\Http\Integrations\MyinfoBusinessV3\Requests\GetCorppassOpenIdConfigurationRequest;
 use Ziming\LaravelMyinfoBusinessSg\Http\Integrations\MyinfoBusinessV3\Requests\GetEntityPersonRequest;
 use Ziming\LaravelMyinfoBusinessSg\Http\Integrations\MyinfoBusinessV3\Requests\PushedAuthorizationRequest;
 use Ziming\LaravelMyinfoBusinessSg\Http\Integrations\MyinfoBusinessV3\Responses\GetEntityPersonResponse;
+use Ziming\LaravelMyinfoBusinessSg\Services\MyinfoBusinessV3\IdTokenValidator;
 
 class MyinfoBusinessConnector extends Connector
 {
@@ -82,6 +84,7 @@ class MyinfoBusinessConnector extends Connector
 
     /**
      * @throws \JsonException
+     * @throws \Ziming\LaravelMyinfoBusinessSg\Exceptions\InvalidIdTokenException
      */
     public function getAccessToken(string $code): array
     {
@@ -106,8 +109,29 @@ class MyinfoBusinessConnector extends Connector
             $dpopPublicJwk
         );
         $response = $getAccessTokenRequest->send();
+        $tokenResponse = $response->json();
 
-        return $response->json();
+        // Decrypt, verify and validate the returned ID token (iss/aud/exp/nonce/
+        // at_hash) before the access token is trusted, per the CorpPass spec.
+        // The nonce is pulled (single-use) to mitigate replay attacks.
+        $expectedNonce = session()->pull(
+            config('laravel-myinfo-business-sg-v3.nonce_session_key')
+        );
+
+        if (! is_string($expectedNonce) || $expectedNonce === '') {
+            throw new InvalidIdTokenException(
+                message: 'No nonce found in session for ID token validation'
+            );
+        }
+
+        IdTokenValidator::validate(
+            $tokenResponse,
+            $configData['jwks_uri'],
+            $issuer,
+            $expectedNonce
+        );
+
+        return $tokenResponse;
     }
 
     /**
