@@ -4,103 +4,62 @@ declare(strict_types=1);
 
 namespace Ziming\LaravelMyinfoBusinessSg\Tests\Unit\MyinfoBusinessV3;
 
-use Jose\Component\Core\JWK;
 use Jose\Component\KeyManagement\JWKFactory;
 use Ziming\LaravelMyinfoBusinessSg\Services\MyinfoBusinessV3\DPoPProofGenerator;
-use Ziming\LaravelMyinfoBusinessSg\Tests\TestCase;
 
-class DPoPProofGeneratorTest extends TestCase
-{
-    private JWK $privateJwk;
+beforeEach(function (): void {
+    $this->privateJwk = JWKFactory::createECKey('P-256', [
+        'alg' => 'ES256',
+        'use' => 'sig',
+    ]);
+    $this->publicJwk = $this->privateJwk->toPublic();
+});
 
-    private JWK $publicJwk;
+it('generates a dpop proof without an access token', function (): void {
+    $proof = DPoPProofGenerator::make(
+        'POST',
+        'https://stg-id.corppass.gov.sg/fapi/par',
+        $this->privateJwk,
+        $this->publicJwk
+    );
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    [$header, $payload] = decodeCompactJwt($proof);
 
-        $this->privateJwk = JWKFactory::createECKey('P-256', [
-            'alg' => 'ES256',
-            'use' => 'sig',
-        ]);
-        $this->publicJwk = $this->privateJwk->toPublic();
-    }
+    expect($header['typ'])->toBe('dpop+jwt')
+        ->and($header['alg'])->toBe('ES256')
+        ->and($header['jwk']['x'])->toBe($this->publicJwk->get('x'))
+        ->and($header['jwk']['y'])->toBe($this->publicJwk->get('y'))
+        ->and($header['jwk'])->not->toHaveKey('d')
+        ->and($payload['htm'])->toBe('POST')
+        ->and($payload['htu'])->toBe('https://stg-id.corppass.gov.sg/fapi/par')
+        ->and($payload['iat'])->toBeInt()
+        ->and($payload['exp'])->toBeInt()
+        ->and($payload['exp'] - $payload['iat'])->toBe(120)
+        ->and($payload['jti'])->not->toBeEmpty()
+        ->and($payload)->not->toHaveKey('ath');
+});
 
-    public function test_dpop_proof_without_access_token(): void
-    {
-        $proof = DPoPProofGenerator::make(
-            'POST',
-            'https://stg-id.corppass.gov.sg/fapi/par',
-            $this->privateJwk,
-            $this->publicJwk
-        );
+it('generates a dpop proof with the correct access token hash', function (): void {
+    $accessToken = 'example-access-token';
 
-        [$header, $payload] = $this->decodeCompactJwt($proof);
+    $proof = DPoPProofGenerator::make(
+        'GET',
+        'https://stg-id.corppass.gov.sg/fapi/userinfo',
+        $this->privateJwk,
+        $this->publicJwk,
+        $accessToken
+    );
 
-        $this->assertSame('dpop+jwt', $header['typ']);
-        $this->assertSame('ES256', $header['alg']);
-        $this->assertSame($this->publicJwk->get('x'), $header['jwk']['x']);
-        $this->assertSame($this->publicJwk->get('y'), $header['jwk']['y']);
-        $this->assertArrayNotHasKey('d', $header['jwk']);
+    [, $payload] = decodeCompactJwt($proof);
 
-        $this->assertSame('POST', $payload['htm']);
-        $this->assertSame('https://stg-id.corppass.gov.sg/fapi/par', $payload['htu']);
-        $this->assertIsInt($payload['iat']);
-        $this->assertIsInt($payload['exp']);
-        $this->assertSame(120, $payload['exp'] - $payload['iat']);
-        $this->assertNotEmpty($payload['jti']);
-        $this->assertArrayNotHasKey('ath', $payload);
-    }
+    $expectedAth = rtrim(
+        strtr(
+            base64_encode(hash('sha256', $accessToken, true)),
+            '+/',
+            '-_'
+        ),
+        '='
+    );
 
-    public function test_dpop_proof_with_access_token_has_correct_ath_hash(): void
-    {
-        $accessToken = 'example-access-token';
-
-        $proof = DPoPProofGenerator::make(
-            'GET',
-            'https://stg-id.corppass.gov.sg/fapi/userinfo',
-            $this->privateJwk,
-            $this->publicJwk,
-            $accessToken
-        );
-
-        [, $payload] = $this->decodeCompactJwt($proof);
-
-        $expectedAth = rtrim(
-            strtr(
-                base64_encode(hash('sha256', $accessToken, true)),
-                '+/',
-                '-_'
-            ),
-            '='
-        );
-
-        $this->assertSame($expectedAth, $payload['ath']);
-    }
-
-    /**
-     * @return array{array<string, mixed>, array<string, mixed>}
-     *
-     * @throws \JsonException
-     */
-    private function decodeCompactJwt(string $compactJwt): array
-    {
-        [$encodedHeader, $encodedPayload] = explode('.', $compactJwt, 3);
-
-        return [
-            json_decode($this->decodeBase64Url($encodedHeader), true, 512, JSON_THROW_ON_ERROR),
-            json_decode($this->decodeBase64Url($encodedPayload), true, 512, JSON_THROW_ON_ERROR),
-        ];
-    }
-
-    private function decodeBase64Url(string $value): string
-    {
-        $padding = strlen($value) % 4;
-
-        if ($padding !== 0) {
-            $value .= str_repeat('=', 4 - $padding);
-        }
-
-        return base64_decode(strtr($value, '-_', '+/'), true) ?: '';
-    }
-}
+    expect($payload['ath'])->toBe($expectedAth);
+});
