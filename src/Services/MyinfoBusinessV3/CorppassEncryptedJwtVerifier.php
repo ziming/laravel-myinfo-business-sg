@@ -8,6 +8,11 @@ use Jose\Component\Checker\AlgorithmChecker;
 use Jose\Component\Checker\HeaderCheckerManager;
 use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\JWKSet;
+use Jose\Component\Encryption\Algorithm\ContentEncryption\A128CBCHS256;
+use Jose\Component\Encryption\Algorithm\ContentEncryption\A128GCM;
+use Jose\Component\Encryption\Algorithm\ContentEncryption\A192CBCHS384;
+use Jose\Component\Encryption\Algorithm\ContentEncryption\A192GCM;
+use Jose\Component\Encryption\Algorithm\ContentEncryption\A256CBCHS512;
 use Jose\Component\Encryption\Algorithm\ContentEncryption\A256GCM;
 use Jose\Component\Encryption\Algorithm\KeyEncryption\ECDHESA128KW;
 use Jose\Component\Encryption\Algorithm\KeyEncryption\ECDHESA192KW;
@@ -59,7 +64,15 @@ class CorppassEncryptedJwtVerifier
     private static function decryptJwe(string $jweToken): string
     {
         $algorithmManager = new AlgorithmManager([
+            // Content encryption: CorpPass uses A256CBC-HS512 for the id_token and
+            // A256GCM for the userinfo JWE; register the GCM and CBC-HS variants.
+            new A128GCM,
+            new A192GCM,
             new A256GCM,
+            new A128CBCHS256,
+            new A192CBCHS384,
+            new A256CBCHS512,
+            // Key management (DPoP-bound ECDH-ES key agreement + AES key wrap).
             new ECDHESA128KW,
             new ECDHESA192KW,
             new ECDHESA256KW,
