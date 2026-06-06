@@ -254,7 +254,7 @@ MYINFOBIZ_V3_ENABLE_DEFAULT_MYINFO_AUTHORIZATION_REDIRECT_ROUTE=false
 MYINFOBIZ_V3_CALL_AUTHORIZATION_API_URI=/redirect-to-corppass-v3
 # When true, registers the GET public-jwks route at the URI below.
 MYINFOBIZ_V3_ENABLE_DEFAULT_PUBLIC_JWKS_ENDPOINT_ROUTE=false
-MYINFOBIZ_V3_PUBLIC_JWKS_URI=/cp/v3/jwks
+MYINFOBIZ_V3_PUBLIC_JWKS_URI=/mib/v3/jwks
 
 # --- Debug logging ---
 MYINFOBIZ_V3_DEBUG_MODE=false
@@ -278,7 +278,7 @@ MYINFOBIZ_V3_DEBUG_MODE=false
 | `MYINFOBIZ_V3_ENABLE_DEFAULT_MYINFO_AUTHORIZATION_REDIRECT_ROUTE` | `enable_default_myinfo_authorization_redirect_route` | `false` | Toggle for registering the default authorization-redirect route. |
 | `MYINFOBIZ_V3_CALL_AUTHORIZATION_API_URI` | `call_authorization_api_uri` | `/redirect-to-corppass-v3` | URI for the authorization-redirect route. |
 | `MYINFOBIZ_V3_ENABLE_DEFAULT_PUBLIC_JWKS_ENDPOINT_ROUTE` | `enable_default_public_jwks_endpoint_route` | `false` | Toggle for registering the default public-jwks route. |
-| `MYINFOBIZ_V3_PUBLIC_JWKS_URI` | `public_jwks_uri` | `/cp/v3/jwks` | URI for the public-jwks route. |
+| `MYINFOBIZ_V3_PUBLIC_JWKS_URI` | `public_jwks_uri` | `/mib/v3/jwks` | URI for the public-jwks route. |
 | `MYINFOBIZ_V3_DEBUG_MODE` | `debug_mode` | `false` | When true, logs the authorization URL and PAR request URI via `Log::debug`. |
 
 The `call_authorization_api_controller` (`CallAuthorizationApiController`) and `public_jwks_controller`
@@ -313,7 +313,7 @@ Enable the default route by setting the toggle:
 
 ```.dotenv
 MYINFOBIZ_V3_ENABLE_DEFAULT_PUBLIC_JWKS_ENDPOINT_ROUTE=true
-MYINFOBIZ_V3_PUBLIC_JWKS_URI=/cp/v3/jwks
+MYINFOBIZ_V3_PUBLIC_JWKS_URI=/mib/v3/jwks
 ```
 
 This registers a `GET` route named `myinfo-business-v3.public-jwks` at the configured URI.
@@ -326,7 +326,7 @@ Or, if you prefer to wire it manually (e.g. to add middleware or change the path
 use Illuminate\Support\Facades\Route;
 use Ziming\LaravelMyinfoBusinessSg\Http\Controllers\MyinfoBusinessV3\PublicJwksController;
 
-Route::get('/cp/v3/jwks', PublicJwksController::class)
+Route::get('/mib/v3/jwks', PublicJwksController::class)
     ->name('myinfo-business-v3.public-jwks');
 ```
 
